@@ -1,0 +1,9 @@
+---
+Name: cms_tricks_for_apps
+After: framework/routes#coreroutes
+---
+Director:
+  rules:
+    'replacelist//$Action/$ID/$OtherID': 'MyDataObjectImport_Replace'
+
+

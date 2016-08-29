@@ -2,22 +2,26 @@
     "name": "sunnysideup/cms_tricks_for_apps",
     "type": "silverstripe-module",
     "description": "A mixed bag of tricks for the Silvestripe CMS. Most of them will be obsolete in the future, as there a lot of hacks here with CMS code that does not work so well.",
-    "keywords": ["silverstripe", "cms", "applications", "back-end", "editor"],
+    "keywords": [
+        "silverstripe",
+        "cms",
+        "applications",
+        "back-end",
+        "editor"
+    ],
     "license": "Sunny Side Up (BSD-3-Clause and CUSTOM)",
-    "authors":[
+    "authors": [
         {
             "name": "Nicolaas Francken",
-            "homepage": "https://github.com/sunnysideup",
-            "email" : "modules@sunnysideup.co.nz",
-            "role" : "lead developer"
+            "email": "modules@sunnysideup.co.nz",
+            "role": "lead developer"
         }
     ],
-    "require":{
+    "require": {
         "silverstripe/framework": "^3.4",
-        "silverstripe/cms": "^3.4"        
+        "silverstripe/cms": "^3.4"
     },
     "extra": {
         "installer-name": "cms_tricks_for_apps"
     }
-
 }

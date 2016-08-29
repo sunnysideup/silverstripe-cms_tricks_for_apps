@@ -3,8 +3,9 @@
     "type": "silverstripe-module",
     "description": "A mixed bag of tricks for the Silvestripe CMS. Most of them will be obsolete in the future, as there a lot of hacks here with CMS code that does not work so well.",
     "keywords": [
-        "silverstripe",
-        "cms",
+        "Silverstripe-CMS",
+        "CMS",
+        "Silverstripe",
         "applications",
         "back-end",
         "editor"
@@ -18,8 +19,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^3.4",
-        "silverstripe/cms": "^3.4"
+        "silverstripe/framework": "~3.1",
+        "silverstripe/cms": "~3.1"
     },
     "extra": {
         "installer-name": "cms_tricks_for_apps"

@@ -1,5 +1,5 @@
 <?php
 
-class ValidationDE extends DataExtension {
-
+class ValidationDE extends DataExtension
+{
 }

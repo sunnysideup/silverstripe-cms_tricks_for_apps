@@ -11,28 +11,31 @@
  *
  */
 
-class HasManyGridFieldHack_HasManyList extends Extension {
-	public function getForeignKey(){
-		return $this->owner->foreignKey;
-	}
+class HasManyGridFieldHack_HasManyList extends Extension
+{
+    public function getForeignKey()
+    {
+        return $this->owner->foreignKey;
+    }
 }
 
-class HasManyGridFieldHack extends Extension {
-
-	function updateItemEditForm($form){
-		$list = $this->owner->gridField->getList();
-		if($list && $list instanceOf HasManyList) {
-			$foreignKey = $list->getForeignKey();
-			$dataClass = $list->dataClass();
-			$dataQuery = $list->dataQuery();
-			$foreignID = $list->getForeignID();
-			$fields = $form->Fields();
-			$field = $fields->dataFieldByName($foreignKey);
-			if($field) {
-				$field->setValue($foreignID);
-				$fields->replaceField($field->Name,  $field->performDisabledTransformation());
-			}
-			$this->owner->record->$foreignKey = $foreignID;
-		}
-	}
+class HasManyGridFieldHack extends Extension
+{
+    public function updateItemEditForm($form)
+    {
+        $list = $this->owner->gridField->getList();
+        if ($list && $list instanceof HasManyList) {
+            $foreignKey = $list->getForeignKey();
+            $dataClass = $list->dataClass();
+            $dataQuery = $list->dataQuery();
+            $foreignID = $list->getForeignID();
+            $fields = $form->Fields();
+            $field = $fields->dataFieldByName($foreignKey);
+            if ($field) {
+                $field->setValue($foreignID);
+                $fields->replaceField($field->Name,  $field->performDisabledTransformation());
+            }
+            $this->owner->record->$foreignKey = $foreignID;
+        }
+    }
 }

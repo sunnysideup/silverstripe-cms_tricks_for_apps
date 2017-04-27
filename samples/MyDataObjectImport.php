@@ -35,9 +35,10 @@ class MyDataObjectImport extends CMSTricksCsvBulkLoader
             foreach ($valArray as $key => $myParentDataObjectCode) {
                 $valArray[$key] = $filter->checkCode($myParentDataObjectCode);
                 $newCode = $valArray[$key];
-                $newMyParentDataObject = MyParentDataObject::get()
-                    ->filter(array("Code" => $newCode))
-                    ->First();
+                $newMyParentDataObject = DataObject::get_one(
+                    'MyParentDataObject',
+                    array("Code" => $newCode)
+                );
                 if (!$newMyParentDataObject) {
                     $newMyParentDataObject = new MyParentDataObject();
                     $newMyParentDataObject->Title = $newCode;
@@ -52,11 +53,11 @@ class MyDataObjectImport extends CMSTricksCsvBulkLoader
                 foreach ($myParentDataObjects as $myParentDataObject) {
                     $obj->MyParentDataObjects()->add($myParentDataObject);
                     DB::query("
-						UPDATE \"MyParentDataObject_MyDataObjects\"
-						SET \"MyOtherField\" = ".$count."
-						WHERE
-							\"MyParentDataObjectID\" = ".$myParentDataObject->ID." AND
-							\"MyDataObjectID\" = ".$obj->ID." "
+                        UPDATE \"MyParentDataObject_MyDataObjects\"
+                        SET \"MyOtherField\" = ".$count."
+                        WHERE
+                            \"MyParentDataObjectID\" = ".$myParentDataObject->ID." AND
+                            \"MyDataObjectID\" = ".$obj->ID." "
                     );
                     $count++;
                 }
@@ -131,23 +132,23 @@ class MyDataObjectImport_Replace extends Controller
     private function printList()
     {
         echo "
-		<h1>replace list</h1>
-		<p>How this works</p>
-		<ol>
-			<li>download an import example below</li>
-			<li>remove the MyDataObjects for your selected MyParentDataObject</li>
-			<li><a href=\"".$this->uploadLink()."\">import the new entries</a></li>
-		</ol>
-		<ul>";
+        <h1>replace list</h1>
+        <p>How this works</p>
+        <ol>
+            <li>download an import example below</li>
+            <li>remove the MyDataObjects for your selected MyParentDataObject</li>
+            <li><a href=\"".$this->uploadLink()."\">import the new entries</a></li>
+        </ol>
+        <ul>";
         foreach ($this->lists as $list) {
             echo "
-			<li><strong>".$list->getFullTitle()."</strong>
-				<blockquote>1. <a href=\"".$this->Link("downloadexample/".$list->ID."/")."\">download import example</a></blockquote>
-				<blockquote>2. <a href=\"".$this->Link("deleteoptions/".$list->ID."/")."\">remove MyDataObjects</a></blockquote>
-			</li>";
+            <li><strong>".$list->getFullTitle()."</strong>
+                <blockquote>1. <a href=\"".$this->Link("downloadexample/".$list->ID."/")."\">download import example</a></blockquote>
+                <blockquote>2. <a href=\"".$this->Link("deleteoptions/".$list->ID."/")."\">remove MyDataObjects</a></blockquote>
+            </li>";
         }
         echo "
-		</ul>";
+        </ul>";
     }
 
     public function deleteoptions($request)

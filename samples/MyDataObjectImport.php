@@ -35,12 +35,14 @@ class MyDataObjectImport extends CMSTricksCsvBulkLoader
             foreach ($valArray as $key => $myParentDataObjectCode) {
                 $valArray[$key] = $filter->checkCode($myParentDataObjectCode);
                 $newCode = $valArray[$key];
+                $filter = array("Code" => $newCode);
                 $newMyParentDataObject = DataObject::get_one(
                     'MyParentDataObject',
-                    array("Code" => $newCode)
+                    $filter,
+                    $cacheDataObjectGetOne = false
                 );
-                if (!$newMyParentDataObject) {
-                    $newMyParentDataObject = new MyParentDataObject();
+                if (! $newMyParentDataObject) {
+                    $newMyParentDataObject = MyParentDataObject::create($filter);
                     $newMyParentDataObject->Title = $newCode;
                     $newMyParentDataObject->Code = $newCode;
                     $newMyParentDataObject->write();

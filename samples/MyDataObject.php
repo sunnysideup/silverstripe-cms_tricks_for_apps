@@ -111,11 +111,6 @@ class MyDataObject extends DataObject {
         return $this->dbObject('Required')->Nice();
     }
 
-
-    public function requireDefaultRecords(){
-        parent::requireDefaultRecords();
-    }
-
     public function populateDefaults() {
         parent::populateDefaults();
         if(!$this->NumericalValue) {

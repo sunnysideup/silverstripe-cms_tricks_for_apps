@@ -33,7 +33,7 @@ class HasManyGridFieldHack extends Extension
             $field = $fields->dataFieldByName($foreignKey);
             if ($field) {
                 $field->setValue($foreignID);
-                $fields->replaceField($field->Name,  $field->performDisabledTransformation());
+                $fields->replaceField($field->Name, $field->performDisabledTransformation());
             }
             $this->owner->record->$foreignKey = $foreignID;
         }
